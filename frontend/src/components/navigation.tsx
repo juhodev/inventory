@@ -2,7 +2,10 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 const NavigationComponent = () => {
-	const paths = [{ to: '/', name: 'Inventory' }];
+	const paths = [
+		{ to: '/', name: 'Inventory' },
+		{ to: '/manage', name: 'Manage' },
+	];
 
 	const { pathname } = window.location;
 

@@ -29,3 +29,7 @@ export enum SortType {
 export interface SearchComponentProps {
 	onChange: (search: string) => void;
 }
+
+export interface ManageSidebarComponentProps {
+	onChange: (tab: string) => void;
+}

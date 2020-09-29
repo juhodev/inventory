@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { timeSince } from '../utils/timeUtils';
-import { ItemComponentProps } from './types';
+import { timeSince } from '../../utils/timeUtils';
+import { ItemComponentProps } from '../types';
 
 const ItemComponent = (props: ItemComponentProps) => {
 	const { item, onClick } = props;

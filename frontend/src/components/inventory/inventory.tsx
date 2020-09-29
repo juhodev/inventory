@@ -3,8 +3,8 @@ import ItemComponent from './item';
 import ItemInfoComponent from './itemInfo';
 import SearchComponent from './search';
 import SortComponent from './sort';
-import { Item, SortType } from './types';
-import { filterSearch } from '../ts/search';
+import { Item, SortType } from '../types';
+import { filterSearch } from '../../ts/search';
 
 const { useState, useEffect } = React;
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SearchComponentProps } from './types';
+import { SearchComponentProps } from '../types';
 
 const { useState } = React;
 

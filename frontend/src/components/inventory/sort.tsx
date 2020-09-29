@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SortComponentProps, SortType } from './types';
+import { SortComponentProps, SortType } from '../types';
 
 const SortComponent = (props: SortComponentProps) => {
 	const { onChange } = props;

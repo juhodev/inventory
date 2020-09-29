@@ -25,3 +25,7 @@ export interface SortComponentProps {
 export enum SortType {
 	LAST_UPDATED = 'Last updated',
 }
+
+export interface SearchComponentProps {
+	onChange: (search: string) => void;
+}

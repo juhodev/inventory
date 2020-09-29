@@ -5,7 +5,7 @@ const SortComponent = (props: SortComponentProps) => {
 	const { onChange } = props;
 
 	return (
-		<div className="flex flex-row w-full font-body p-6 text-xl">
+		<div className="flex flex-row font-body p-6 text-xl">
 			<label htmlFor="sort-by-select" className="pr-3 text-gray-500">Sort by</label>
 			<select
 				id="sort-by-select"

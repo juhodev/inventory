@@ -1,8 +1,11 @@
 import * as React from 'react';
 import ItemComponent from './item';
 import ItemInfoComponent from './itemInfo';
+import SearchComponent from './search';
 import SortComponent from './sort';
 import { Item, SortType } from './types';
+import { filterSearch } from '../ts/search';
+
 const { useState, useEffect } = React;
 
 const InventoryComponent = () => {
@@ -27,6 +30,7 @@ const InventoryComponent = () => {
 		},
 	]);
 	const [selectedItem, setSelectedItem] = useState(-1);
+	const [searchFilter, setSearchFilter] = useState('');
 
 	// useEffect(() => {
 	// 	const itemsUrl = `http://${window.location.hostname}:8080/inventory`;
@@ -39,7 +43,8 @@ const InventoryComponent = () => {
 	// 		});
 	// }, []);
 
-	const itemComponents = items.map((item, i) => {
+	const filteredItems: Item[] = filterSearch(items, searchFilter);
+	const itemComponents = filteredItems.map((item, i) => {
 		return (
 			<ItemComponent
 				key={item.id}
@@ -58,11 +63,18 @@ const InventoryComponent = () => {
 
 	return (
 		<div className="mx-24">
-			<SortComponent
-				onChange={(sortType: SortType) => {
-					console.log(sortType);
-				}}
-			/>
+			<div className="flex flex-row items-center">
+				<SortComponent
+					onChange={(sortType: SortType) => {
+						console.log(sortType);
+					}}
+				/>
+				<SearchComponent
+					onChange={(search) => {
+						setSearchFilter(search);
+					}}
+				/>
+			</div>
 			<div className="flex flex-row">
 				<div className="flex flex-col w-full h-full">
 					{itemComponents}

@@ -8,11 +8,11 @@ const ItemInfoComponent = (props: ItemInfoComponentProps) => {
 
 	return (
 		<div className="container flex flex-col w-1/1.5 font-body items-center">
-			<div className="border w-1/1.5 rounded-lg">
+			<div className="shadow border-indigo-600 w-1/1.5 rounded-lg">
 				<div className="flex justify-center items-center w-full h-64 overflow-hidden rounded-t-lg">
 					<img src={img} />
 				</div>
-				<div className="p-6">
+				<div className="p-6 bg-blue-50">
 					<div className="flex flex-col pb-3">
 						<span className="font-bold text-3xl leading-none text-blue-500">
 							{name}

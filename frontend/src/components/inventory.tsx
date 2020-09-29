@@ -14,6 +14,7 @@ const InventoryComponent = () => {
 			img: 'https://loremflickr.com/500/500/animal',
 			info: 'test  info',
 			location: 'A1',
+			lastUpdate: 967248000000,
 		},
 		{
 			name: 'Intel i7-8700',
@@ -22,6 +23,7 @@ const InventoryComponent = () => {
 			img: 'https://loremflickr.com/500/500/animal',
 			info: 'test  info',
 			location: 'A1',
+			lastUpdate: 967248000000,
 		},
 	]);
 	const [selectedItem, setSelectedItem] = useState(-1);
@@ -62,7 +64,9 @@ const InventoryComponent = () => {
 				}}
 			/>
 			<div className="flex flex-row">
-				<div className="flex flex-col w-full h-full">{itemComponents}</div>
+				<div className="flex flex-col w-full h-full">
+					{itemComponents}
+				</div>
 				{selectedItem !== -1 && (
 					<ItemInfoComponent item={items[selectedItem]} />
 				)}

@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { timeSince } from '../utils/timeUtils';
 import { ItemComponentProps } from './types';
 
 const ItemComponent = (props: ItemComponentProps) => {
 	const { item, onClick } = props;
-	const { img, name, location, count } = item;
+	const { img, name, location, count, lastUpdate } = item;
 
 	return (
 		<div
@@ -19,7 +20,7 @@ const ItemComponent = (props: ItemComponentProps) => {
 						{name}
 					</span>
 					<span className="text-xl text-gray-500">
-						Last updated 5 days ago
+						Last updated {timeSince(new Date(lastUpdate))} ago
 					</span>
 				</div>
 				<div className="flex h-full text-xl">

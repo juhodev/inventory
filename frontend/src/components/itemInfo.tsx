@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { timeSince } from '../utils/timeUtils';
 import { ItemInfoComponentProps } from './types';
 
 const ItemInfoComponent = (props: ItemInfoComponentProps) => {
 	const { item } = props;
-	const { name, count, info, location, img } = item;
+	const { name, count, info, location, img, lastUpdate } = item;
 
 	return (
 		<div className="container flex flex-col w-1/1.5 font-body items-center">
@@ -17,7 +18,7 @@ const ItemInfoComponent = (props: ItemInfoComponentProps) => {
 							{name}
 						</span>
 						<span className="text-xl text-gray-500">
-							Last updated 5 days ago
+							Last updated {timeSince(new Date(lastUpdate))} ago
 						</span>
 					</div>
 					<span className="text-lg">{info}</span>

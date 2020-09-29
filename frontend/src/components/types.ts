@@ -5,6 +5,8 @@ export interface Item {
 	info: string;
 	location: string;
 	img: string;
+	lastUpdate: number;
+	link?: string;
 }
 
 export interface ItemComponentProps {

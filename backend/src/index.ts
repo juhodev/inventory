@@ -5,7 +5,7 @@ import * as cors from 'cors';
 import InventoryRouter from './routes/inventory';
 
 const app = express();
-app.use(bodyParser());
+app.use(bodyParser.json());
 app.use(cors());
 
 app.use((req, res, next) => {

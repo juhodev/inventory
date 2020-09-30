@@ -12,6 +12,7 @@ export default class ItemManager {
 
 	load() {
 		this.inventory.load();
+		this.tags.load();
 	}
 
 	getInventory(): ItemInventory {

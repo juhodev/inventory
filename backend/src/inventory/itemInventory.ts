@@ -12,7 +12,10 @@ export default class ItemInventory {
 
 	load() {
 		if (!fs.existsSync('data/inventory.json')) {
-			fs.mkdirSync('data');
+			if (!fs.existsSync('data')) {
+				fs.mkdirSync('data');
+			}
+			
 			this.writeToDisk();
 			return;
 		}

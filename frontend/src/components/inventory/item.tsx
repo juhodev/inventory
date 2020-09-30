@@ -12,7 +12,14 @@ const ItemComponent = (props: ItemComponentProps) => {
 			onClick={onClick}
 		>
 			<div className="flex justify-center items-center w-32 h-32">
-				<img className="max-w-20 rounded-lg" src={img} />
+				<img
+					className="max-w-20 rounded-lg"
+					src={
+						img === undefined
+							? 'https://loremflickr.com/500/500/animal'
+							: img
+					}
+				/>
 			</div>
 			<div className="pl-6 flex flex-col h-full">
 				<div className="flex flex-col">

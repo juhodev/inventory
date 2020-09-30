@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-	const request = JSON.parse(req.body);
-	const { name, info, location, img, count } = request;
+	const { body } = req;
+	const { name, info, location, img, count, link } = body;
 
 	const response: ItemInventoryResponse = inventory.add(
 		name,
@@ -20,6 +20,7 @@ router.post('/add', (req, res) => {
 		location,
 		img,
 		count,
+		link,
 	);
 
 	res.json(response);

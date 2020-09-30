@@ -10,7 +10,13 @@ const ItemInfoComponent = (props: ItemInfoComponentProps) => {
 		<div className="container flex flex-col w-1/1.5 font-body items-center">
 			<div className="shadow border-indigo-600 w-1/1.5 rounded-lg">
 				<div className="flex justify-center items-center w-full h-64 overflow-hidden rounded-t-lg">
-					<img src={img} />
+					<img
+						src={
+							img === undefined
+								? 'https://loremflickr.com/500/500/animal'
+								: img
+						}
+					/>
 				</div>
 				<div className="p-6 bg-blue-50">
 					<div className="flex flex-col pb-3">

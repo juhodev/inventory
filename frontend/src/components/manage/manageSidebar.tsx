@@ -31,7 +31,7 @@ const ManageSidebarComponent = (props: ManageSidebarComponentProps) => {
 	});
 
 	return (
-		<div className="h-full font-body w-12 flex flex-col pl-6 pt-12">
+		<div className="h-full font-body flex flex-col pl-6 pt-12">
 			{tabComponents}
 		</div>
 	);

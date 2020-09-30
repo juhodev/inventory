@@ -1,3 +1,5 @@
+import TextInputComponent from './manage/textInput';
+
 export interface Item {
 	id: number;
 	name: string;
@@ -6,7 +8,7 @@ export interface Item {
 	location: string;
 	img: string;
 	lastUpdate: number;
-	link?: string;
+	link: string;
 }
 
 export interface ItemComponentProps {
@@ -32,4 +34,16 @@ export interface SearchComponentProps {
 
 export interface ManageSidebarComponentProps {
 	onChange: (tab: string) => void;
+}
+
+export interface TextInputComponentProps {
+	title: string;
+	placeholder: string;
+	onChange: (value: string) => void;
+}
+
+export interface TextAreaComponentProps {
+	title: string;
+	placeholder: string;
+	onChange: (value: string) => void;
 }

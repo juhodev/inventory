@@ -9,7 +9,9 @@ import { Item } from '../components/types';
 export function filterSearch(items: Item[], userSearch: string): Item[] {
 	const searchLowerCase = userSearch.toLowerCase();
 
-	return items.filter((item) =>
+	const filteredItems: Item[] = items.filter((item) =>
 		item.name.toLowerCase().startsWith(searchLowerCase),
 	);
+
+	return filteredItems.sort((a, b) => a.lastUpdate - b.lastUpdate);
 }

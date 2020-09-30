@@ -9,39 +9,20 @@ import { filterSearch } from '../../ts/search';
 const { useState, useEffect } = React;
 
 const InventoryComponent = () => {
-	const [items, setItems] = useState([
-		{
-			name: 'MSI B450 TOMAHAWK MAX',
-			count: 2,
-			id: 0,
-			img: 'https://loremflickr.com/500/500/animal',
-			info: 'test  info',
-			location: 'A1',
-			lastUpdate: 967248000000,
-		},
-		{
-			name: 'Intel i7-8700',
-			count: 1,
-			id: 1,
-			img: 'https://loremflickr.com/500/500/animal',
-			info: 'test  info',
-			location: 'A1',
-			lastUpdate: 967248000000,
-		},
-	]);
+	const [items, setItems] = useState([]);
 	const [selectedItem, setSelectedItem] = useState(-1);
 	const [searchFilter, setSearchFilter] = useState('');
 
-	// useEffect(() => {
-	// 	const itemsUrl = `http://${window.location.hostname}:8080/inventory`;
+	useEffect(() => {
+		const itemsUrl = `http://${window.location.hostname}:8080/inventory`;
 
-	// 	fetch(itemsUrl)
-	// 		.then((response) => response.json())
-	// 		.then((data) => {
-	// 			const { inventory } = data;
-	// 			setItems(inventory);
-	// 		});
-	// }, []);
+		fetch(itemsUrl)
+			.then((response) => response.json())
+			.then((data) => {
+				const { inventory } = data;
+				setItems(inventory);
+			});
+	}, []);
 
 	const filteredItems: Item[] = filterSearch(items, searchFilter);
 	const itemComponents = filteredItems.map((item, i) => {

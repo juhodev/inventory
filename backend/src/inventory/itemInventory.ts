@@ -36,6 +36,7 @@ export default class ItemInventory {
 		location: string,
 		img: string,
 		count: number = 1,
+		link: string,
 	): ItemInventoryResponse {
 		if (this.items.has(name)) {
 			return {
@@ -46,12 +47,16 @@ export default class ItemInventory {
 
 		this.items.set(name, {
 			id: this.itemIdCounter++,
-			name: name,
-			count: count,
-			info: info,
-			location: location,
-			img: img,
+			name,
+			count,
+			info,
+			location,
+			img,
+			link,
+			lastUpdate: new Date().getTime(),
 		});
+
+		this.writeToDisk();
 
 		return {
 			error: false,

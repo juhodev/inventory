@@ -18,3 +18,8 @@ export interface ItemInventoryFullData {
 	itemIdCounter: number;
 	items: Item[];
 }
+
+export interface TagResponse {
+	error: boolean;
+	message: string;
+}

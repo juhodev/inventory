@@ -34,8 +34,8 @@ const ItemComponent = (props: ItemComponentProps) => {
 					}
 				/>
 			</div>
-			<div className="pl-6 flex flex-col h-full">
-				<div className="flex flex-col">
+			<div className="pl-6 flex flex-col w-full h-full">
+				<div className="flex flex-col w-full">
 					<span className="font-bold text-3xl leading-none text-blue-500">
 						{name}
 					</span>

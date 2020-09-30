@@ -3,6 +3,8 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
 import InventoryRouter from './routes/inventoryRoute';
+import TagsRouter from './routes/tagsRoute';
+
 import ItemManager from './itemManager';
 
 const app = express();
@@ -18,6 +20,7 @@ const itemManager = new ItemManager();
 itemManager.load();
 
 app.use('/inventory', InventoryRouter);
+app.use('/tags', TagsRouter);
 
 const HTTP_PORT = 8080;
 

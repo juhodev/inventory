@@ -15,3 +15,5 @@ router.post('/add', (req, res) => {
 
 	res.json(response);
 });
+
+export default router;

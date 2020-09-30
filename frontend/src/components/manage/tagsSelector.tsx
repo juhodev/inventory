@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { addTag, getTags } from '../../ts/api';
+import { TagSelectorComponentProps } from '../types';
 import TextInputComponent from './textInput';
 
 const { useState, useEffect } = React;
 
-const TagSelectorComponent = () => {
+const TagSelectorComponent = (props: TagSelectorComponentProps) => {
 	const [availableTags, setAvailableTags] = useState(['test', 'test2']);
 	const [newTag, setNewTag] = useState('');
 	const [currentTag, setCurrentTag] = useState('');
 	const [selectedTags, setSelectedTags] = useState([]);
+
+	const { onChange } = props;
 
 	useEffect(() => {
 		fetchTags();
@@ -62,6 +65,7 @@ const TagSelectorComponent = () => {
 					const newTags = [...selectedTags];
 					newTags.push(currentTag);
 					setSelectedTags(newTags);
+					onChange(newTags);
 				}}
 			>
 				ADD TAG

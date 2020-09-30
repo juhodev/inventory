@@ -15,7 +15,7 @@ export default class ItemInventory {
 			if (!fs.existsSync('data')) {
 				fs.mkdirSync('data');
 			}
-			
+
 			this.writeToDisk();
 			return;
 		}
@@ -51,14 +51,14 @@ export default class ItemInventory {
 
 		this.items.set(name, {
 			id: this.itemIdCounter++,
+			lastUpdate: new Date().getTime(),
 			name,
 			count,
 			info,
 			location,
 			img,
 			link,
-			lastUpdate: new Date().getTime(),
-			tags: [],
+			tags,
 		});
 
 		this.writeToDisk();

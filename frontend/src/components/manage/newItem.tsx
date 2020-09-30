@@ -66,7 +66,11 @@ const NewItemComponent = () => {
 					}}
 				/>
 			</div>
-			<TagSelectorComponent />
+			<TagSelectorComponent
+				onChange={(tags) => {
+					setTags(tags);
+				}}
+			/>
 			<button
 				className="shadow bg-blue-500 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
 				onClick={sendAddItem}

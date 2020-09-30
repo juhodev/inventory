@@ -47,3 +47,7 @@ export interface TextAreaComponentProps {
 	placeholder: string;
 	onChange: (value: string) => void;
 }
+
+export interface TagSelectorComponentProps {
+	onChange: (tags: string[]) => void;
+}

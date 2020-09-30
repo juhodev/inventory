@@ -34,7 +34,7 @@ const ItemComponent = (props: ItemComponentProps) => {
 					}
 				/>
 			</div>
-			<div className="pl-6 flex flex-col w-full h-full">
+			<div className="pl-6 flex flex-col h-full">
 				<div className="flex flex-col w-full">
 					<span className="font-bold text-3xl leading-none text-blue-500">
 						{name}
@@ -52,7 +52,7 @@ const ItemComponent = (props: ItemComponentProps) => {
 					<span className="self-end text-gray-500">{count}</span>
 				</div>
 			</div>
-			<div className="w-full flex flex-wrap justify-end">{tagComponents}</div>
+			<div className="flex flex-grow flex-wrap justify-end">{tagComponents}</div>
 		</div>
 	);
 };

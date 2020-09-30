@@ -13,8 +13,8 @@ export default class Tags {
 				error: true,
 				message: `The tag can't be undefined!`,
 			};
-        }
-        
+		}
+
 		const upperCaseTag: string = tag.toUpperCase();
 
 		if (this.tags.includes(upperCaseTag)) {
@@ -25,6 +25,10 @@ export default class Tags {
 		}
 
 		this.tags.push(upperCaseTag);
+		return {
+			error: false,
+			message: `Tag ${upperCaseTag} added`,
+		};
 	}
 
 	getAll(): string[] {

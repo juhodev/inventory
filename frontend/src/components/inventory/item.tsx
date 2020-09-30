@@ -4,7 +4,20 @@ import { ItemComponentProps } from '../types';
 
 const ItemComponent = (props: ItemComponentProps) => {
 	const { item, onClick } = props;
-	const { img, name, location, count, lastUpdate } = item;
+	const { img, name, location, count, lastUpdate, tags } = item;
+
+	const tagComponents =
+		// This is a quick fix please fix this later
+		tags === undefined
+			? []
+			: tags.map((tag) => (
+					<span
+						key={tag}
+						className="text-lg py-2 px-5 m-2 h-10 rounded-full font-bold text-blue-700 bg-gray-200"
+					>
+						{tag}
+					</span>
+			  ));
 
 	return (
 		<div
@@ -39,6 +52,7 @@ const ItemComponent = (props: ItemComponentProps) => {
 					<span className="self-end text-gray-500">{count}</span>
 				</div>
 			</div>
+			<div className="w-full flex flex-wrap justify-end">{tagComponents}</div>
 		</div>
 	);
 };

@@ -35,8 +35,8 @@ const TagSelectorComponent = () => {
 
 	const sendNewTag = async () => {
 		const response = await addTag(newTag);
-        fetchTags();
-        
+		fetchTags();
+
 		console.log(response);
 	};
 

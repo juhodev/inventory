@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
-import InventoryRouter from './routes/inventory';
+import InventoryRouter from './routes/inventoryRoute';
 
 const app = express();
 app.use(bodyParser.json());

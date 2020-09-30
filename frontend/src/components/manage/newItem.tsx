@@ -1,5 +1,6 @@
 import * as React from 'react';
-import addItem from '../../ts/api';
+import { addItem } from '../../ts/api';
+import TagSelectorComponent from './tagsSelector';
 import TextAreaComponent from './textArea';
 import TextInputComponent from './textInput';
 
@@ -11,9 +12,17 @@ const NewItemComponent = () => {
 	const [quantity, setQuantity] = useState('0');
 	const [link, setLink] = useState('');
 	const [info, setInfo] = useState('');
+	const [tags, setTags] = useState([]);
 
 	const sendAddItem = async () => {
-		const response = await addItem(name, location, quantity, link, info);
+		const response = await addItem(
+			name,
+			location,
+			quantity,
+			link,
+			info,
+			tags,
+		);
 
 		console.log(response);
 	};
@@ -57,6 +66,7 @@ const NewItemComponent = () => {
 					}}
 				/>
 			</div>
+			<TagSelectorComponent />
 			<button
 				className="shadow bg-blue-500 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
 				onClick={sendAddItem}

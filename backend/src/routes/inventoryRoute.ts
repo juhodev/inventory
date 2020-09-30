@@ -10,11 +10,11 @@ router.get('/', (req, res) => {
 
 router.post('/add', (req, res) => {
 	const { body } = req;
-	const { name, info, location, img, count, link } = body;
+	const { name, info, location, img, count, link, tags } = body;
 
 	const response: ItemInventoryResponse = itemManager
 		.getInventory()
-		.add(name, info, location, img, count, link);
+		.add(name, info, location, img, count, link, tags);
 
 	res.json(response);
 });

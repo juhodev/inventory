@@ -7,6 +7,7 @@ export interface Item {
 	img: string;
 	lastUpdate: number;
 	link: string;
+	tags: string[];
 }
 
 export interface ItemInventoryResponse {

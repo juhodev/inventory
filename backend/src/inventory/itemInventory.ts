@@ -37,6 +37,7 @@ export default class ItemInventory {
 		img: string,
 		count: number = 1,
 		link: string,
+		tags: string[],
 	): ItemInventoryResponse {
 		if (this.items.has(name)) {
 			return {
@@ -54,6 +55,7 @@ export default class ItemInventory {
 			img,
 			link,
 			lastUpdate: new Date().getTime(),
+			tags: [],
 		});
 
 		this.writeToDisk();

@@ -8,6 +8,13 @@ export default class Tags {
 	}
 
 	add(tag: string): TagResponse {
+		if (tag === undefined) {
+			return {
+				error: true,
+				message: `The tag can't be undefined!`,
+			};
+        }
+        
 		const upperCaseTag: string = tag.toUpperCase();
 
 		if (this.tags.includes(upperCaseTag)) {

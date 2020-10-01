@@ -14,7 +14,7 @@ const SmallItemComponent = (props: SmallItemComponentProps) => {
 			: tags.map((tag) => (
 					<span
 						key={tag}
-						className="text-xs py-1 px-3 m-2 h-6 rounded-full font-bold text-blue-700 bg-gray-200"
+						className="text-xs py-1 px-3 m-1 h-6 rounded-full font-bold text-blue-700 bg-gray-200"
 					>
 						{tag}
 					</span>

@@ -26,13 +26,24 @@ const TagSelectorComponent = (props: TagSelectorComponentProps) => {
 		<option key={tag}>{tag}</option>
 	));
 
+	const removeTag = (tagToRemove: string) => {
+		const newTags = tags.filter((tag) => tag !== tagToRemove);
+		onChange(newTags);
+	};
+
 	const selectedTagComponents = tags.map((tag) => (
-		<span
+		<div
 			key={tag}
-			className="text-lg py-2 px-5 m-2 rounded-full font-bold text-blue-700 bg-gray-200"
+			className="flex text-lg py-2 px-5 m-2 rounded-full font-bold text-blue-700 bg-gray-200 items-center"
 		>
 			{tag}
-		</span>
+			<span
+				className="text-s mx-2 text-red-700 cursor-pointer"
+				onClick={() => removeTag(tag)}
+			>
+				x
+			</span>
+		</div>
 	));
 
 	const sendNewTag = async () => {

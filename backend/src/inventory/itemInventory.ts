@@ -12,7 +12,10 @@ export default class ItemInventory {
 
 	load() {
 		if (!fs.existsSync('data/inventory.json')) {
-			fs.mkdirSync('data');
+			if (!fs.existsSync('data')) {
+				fs.mkdirSync('data');
+			}
+
 			this.writeToDisk();
 			return;
 		}
@@ -37,6 +40,7 @@ export default class ItemInventory {
 		img: string,
 		count: number = 1,
 		link: string,
+		tags: string[],
 	): ItemInventoryResponse {
 		if (this.items.has(name)) {
 			return {
@@ -47,13 +51,14 @@ export default class ItemInventory {
 
 		this.items.set(name, {
 			id: this.itemIdCounter++,
+			lastUpdate: new Date().getTime(),
 			name,
 			count,
 			info,
 			location,
 			img,
 			link,
-			lastUpdate: new Date().getTime(),
+			tags,
 		});
 
 		this.writeToDisk();

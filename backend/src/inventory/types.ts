@@ -7,6 +7,7 @@ export interface Item {
 	img: string;
 	lastUpdate: number;
 	link: string;
+	tags: string[];
 }
 
 export interface ItemInventoryResponse {
@@ -17,4 +18,9 @@ export interface ItemInventoryResponse {
 export interface ItemInventoryFullData {
 	itemIdCounter: number;
 	items: Item[];
+}
+
+export interface TagResponse {
+	error: boolean;
+	message: string;
 }

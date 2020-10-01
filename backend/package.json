@@ -4,7 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "tsc -p tsconfig.json && node build/index.js"
+		"start": "tsc -p tsconfig.json && node build/index.js",
+		"debug": "tsc -p tsconfig.json && node --inspect --inspect-brk build/index.js"
 	},
 	"keywords": [],
 	"author": "",

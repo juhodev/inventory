@@ -55,8 +55,8 @@ const InventoryComponent = () => {
 					}}
 				/>
 			</div>
-			<div className="flex flex-row">
-				<div className="flex flex-col w-full h-full">
+			<div className="flex flex-row h-4/5">
+				<div className="flex flex-col w-full h-full overflow-y-scroll">
 					{itemComponents}
 				</div>
 				{selectedItem !== -1 && (

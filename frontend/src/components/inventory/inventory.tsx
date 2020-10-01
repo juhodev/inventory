@@ -11,7 +11,7 @@ const { useState, useEffect } = React;
 
 const InventoryComponent = () => {
 	const [items, setItems] = useState([]);
-	const [selectedItem, setSelectedItem] = useState(-1);
+	const [selectedItem, setSelectedItem] = useState(undefined);
 	const [searchFilter, setSearchFilter] = useState('');
 
 	const fetchInventory = async () => {
@@ -19,24 +19,26 @@ const InventoryComponent = () => {
 		setItems(inventory);
 	};
 
+	const updateSelectedItem = (item: Item) => {
+		if (selectedItem !== undefined && selectedItem.id === item.id) {
+			setSelectedItem(undefined);
+			return;
+		}
+
+		setSelectedItem(item);
+	};
+
 	useEffect(() => {
 		fetchInventory();
 	}, []);
 
 	const filteredItems: Item[] = filterSearch(items, searchFilter);
-	const itemComponents = filteredItems.map((item, i) => {
+	const itemComponents = filteredItems.map((item) => {
 		return (
 			<ItemComponent
 				key={item.id}
 				item={item}
-				onClick={() => {
-					if (i === selectedItem) {
-						setSelectedItem(-1);
-						return;
-					}
-
-					setSelectedItem(i);
-				}}
+				onClick={() => updateSelectedItem(item)}
 			/>
 		);
 	});
@@ -59,8 +61,8 @@ const InventoryComponent = () => {
 				<div className="flex flex-col w-full h-full overflow-y-scroll">
 					{itemComponents}
 				</div>
-				{selectedItem !== -1 && (
-					<ItemInfoComponent item={filteredItems[selectedItem]} />
+				{selectedItem !== undefined && (
+					<ItemInfoComponent item={selectedItem} />
 				)}
 			</div>
 		</div>

@@ -81,7 +81,7 @@ const EditItemComponent = () => {
 
 	return (
 		<div className="font-body pl-24 flex flex-row flex-shrink-1 h-4/5">
-			<div className="pt-12 w-102">
+			<div className="pt-12 w-1/3">
 				<SearchComponent
 					onChange={(search) => {
 						setSearchFilter(search);

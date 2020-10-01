@@ -4,7 +4,18 @@ import { ItemInfoComponentProps } from '../types';
 
 const ItemInfoComponent = (props: ItemInfoComponentProps) => {
 	const { item } = props;
-	const { name, count, info, location, img, lastUpdate } = item;
+	const { name, count, info, location, img, link, lastUpdate } = item;
+
+	const nameClassName: string =
+		link === ''
+			? 'font-bold text-3xl leading-none text-blue-500'
+			: 'font-bold text-3xl leading-none text-blue-500 cursor-pointer';
+
+	const openItemLink = () => {
+		if (link !== '') {
+			window.open(link, '_blank');
+		}
+	};
 
 	return (
 		<div className="container flex flex-col w-1/1.5 font-body items-center">
@@ -20,7 +31,7 @@ const ItemInfoComponent = (props: ItemInfoComponentProps) => {
 				</div>
 				<div className="p-6 bg-blue-50">
 					<div className="flex flex-col pb-3">
-						<span className="font-bold text-3xl leading-none text-blue-500">
+						<span className={nameClassName} onClick={openItemLink}>
 							{name}
 						</span>
 						<span className="text-xl text-gray-500">

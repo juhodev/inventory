@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { TextInputComponentProps } from '../types';
 
-const { useState } = React;
-
 const TextInputComponent = (props: TextInputComponentProps) => {
-	const [text, setText] = useState('');
-	const { title, placeholder, onChange } = props;
+	const { title, placeholder, onChange, value } = props;
 
 	return (
 		<div className="flex flex-col font-body">
@@ -13,11 +10,9 @@ const TextInputComponent = (props: TextInputComponentProps) => {
 			<input
 				className="border border-gray-400 rounded w-80 p-2 bg-gray-100"
 				placeholder={placeholder}
-				value={text}
+				value={value}
 				onChange={(e) => {
-					const { value } = e.target;
-					setText(value);
-					onChange(value);
+					onChange(e.target.value);
 				}}
 			/>
 		</div>

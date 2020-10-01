@@ -38,15 +38,22 @@ export interface ManageSidebarComponentProps {
 export interface TextInputComponentProps {
 	title: string;
 	placeholder: string;
+	value: string;
 	onChange: (value: string) => void;
 }
 
 export interface TextAreaComponentProps {
 	title: string;
 	placeholder: string;
+	value: string;
 	onChange: (value: string) => void;
 }
 
 export interface TagSelectorComponentProps {
 	onChange: (tags: string[]) => void;
+}
+
+export interface SmallItemComponentProps {
+	item: Item;
+	onClick: () => void;
 }

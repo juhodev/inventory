@@ -73,6 +73,7 @@ const TagSelectorComponent = (props: TagSelectorComponentProps) => {
 			<TextInputComponent
 				title="New tag"
 				placeholder="Tag"
+				value={newTag}
 				onChange={(value) => {
 					setNewTag(value);
 				}}

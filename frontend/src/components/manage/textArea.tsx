@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { TextAreaComponentProps } from '../types';
 
-const { useState } = React;
-
 const TextAreaComponent = (props: TextAreaComponentProps) => {
-	const [text, setText] = useState('');
-	const { title, placeholder, onChange } = props;
+	const { title, placeholder, value, onChange } = props;
 
 	return (
 		<div className="flex flex-col font-body col-span-2">
@@ -13,11 +10,9 @@ const TextAreaComponent = (props: TextAreaComponentProps) => {
 			<textarea
 				className="border border-gray-400 rounded w-full p-2 bg-gray-100"
 				placeholder={placeholder}
-				value={text}
+				value={value}
 				onChange={(e) => {
-					const { value } = e.target;
-					setText(value);
-					onChange(value);
+					onChange(e.target.value);
 				}}
 			/>
 		</div>

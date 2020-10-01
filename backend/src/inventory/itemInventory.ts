@@ -69,20 +69,34 @@ export default class ItemInventory {
 		};
 	}
 
-	setInfo(itemName: string, info: string): ItemInventoryResponse {
-		return this.updateItem(itemName, 'info', info);
-	}
+	updateItem(
+		id: number,
+		name: string,
+		info: string,
+		location: string,
+		img: string,
+		count: number = 1,
+		link: string,
+		tags: string[],
+	): ItemInventoryResponse {
+		this.items.set(name, {
+			lastUpdate: new Date().getTime(),
+			id,
+			name,
+			count,
+			info,
+			location,
+			img,
+			link,
+			tags,
+		});
 
-	setLocation(itemName: string, location: string): ItemInventoryResponse {
-		return this.updateItem(itemName, 'location', location);
-	}
+		this.writeToDisk();
 
-	setImg(itemName: string, img: string): ItemInventoryResponse {
-		return this.updateItem(itemName, 'img', img);
-	}
-
-	setCount(itemName: string, count: number): ItemInventoryResponse {
-		return this.updateItem(itemName, 'count', count);
+		return {
+			error: false,
+			message: `Item ${name} updated`,
+		};
 	}
 
 	getAll() {
@@ -92,30 +106,6 @@ export default class ItemInventory {
 		}
 
 		return itemsArray;
-	}
-
-	private updateItem(
-		itemName: string,
-		key: string,
-		value: any,
-	): ItemInventoryResponse {
-		if (!this.items.has(itemName)) {
-			return {
-				error: true,
-				message: `Item ${itemName} isn't in the database`,
-			};
-		}
-
-		const item: Item = this.items.get(itemName);
-		item[key] = value;
-
-		this.items.set(item.name, item);
-		this.writeToDisk();
-
-		return {
-			error: false,
-			message: `Item ${itemName} updated`,
-		};
 	}
 
 	private writeToDisk() {

@@ -33,6 +33,7 @@ const NewItemComponent = () => {
 				<TextInputComponent
 					title="Name"
 					placeholder="Item name"
+					value={name}
 					onChange={(value) => {
 						setName(value);
 					}}
@@ -40,6 +41,7 @@ const NewItemComponent = () => {
 				<TextInputComponent
 					title="Location"
 					placeholder="Item location"
+					value={location}
 					onChange={(value) => {
 						setLocation(value);
 					}}
@@ -47,6 +49,7 @@ const NewItemComponent = () => {
 				<TextInputComponent
 					title="Quantity"
 					placeholder="0"
+					value={quantity}
 					onChange={(value) => {
 						setQuantity(value);
 					}}
@@ -54,6 +57,7 @@ const NewItemComponent = () => {
 				<TextInputComponent
 					title="Link"
 					placeholder="https://google.com"
+					value={link}
 					onChange={(value) => {
 						setLink(value);
 					}}
@@ -61,12 +65,14 @@ const NewItemComponent = () => {
 				<TextAreaComponent
 					title="Info"
 					placeholder="Info about the item"
+					value={info}
 					onChange={(value) => {
 						setInfo(value);
 					}}
 				/>
 			</div>
 			<TagSelectorComponent
+				tags={tags}
 				onChange={(tags) => {
 					setTags(tags);
 				}}

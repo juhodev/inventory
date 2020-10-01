@@ -61,7 +61,7 @@ const InventoryComponent = () => {
 					{itemComponents}
 				</div>
 				{selectedItem !== -1 && (
-					<ItemInfoComponent item={items[selectedItem]} />
+					<ItemInfoComponent item={filteredItems[selectedItem]} />
 				)}
 			</div>
 		</div>

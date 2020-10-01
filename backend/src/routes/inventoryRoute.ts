@@ -14,7 +14,7 @@ router.post('/add', (req, res) => {
 
 	const response: ItemInventoryResponse = itemManager
 		.getInventory()
-		.add(name, info, location, img, count, link, tags);
+		.add(name, info, location, img, parseInt(count), link, tags);
 
 	res.json(response);
 });
@@ -25,7 +25,7 @@ router.post('/updateItem', (req, res) => {
 
 	const response: ItemInventoryResponse = itemManager
 		.getInventory()
-		.updateItem(id, name, info, location, img, count, link, tags);
+		.updateItem(id, name, info, location, img, parseInt(count), link, tags);
 
 	res.json(response);
 });

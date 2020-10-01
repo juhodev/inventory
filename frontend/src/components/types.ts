@@ -51,6 +51,7 @@ export interface TextAreaComponentProps {
 
 export interface TagSelectorComponentProps {
 	onChange: (tags: string[]) => void;
+	tags: string[];
 }
 
 export interface SmallItemComponentProps {

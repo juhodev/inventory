@@ -72,6 +72,7 @@ const NewItemComponent = () => {
 				/>
 			</div>
 			<TagSelectorComponent
+				tags={tags}
 				onChange={(tags) => {
 					setTags(tags);
 				}}

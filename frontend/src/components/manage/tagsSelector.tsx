@@ -9,9 +9,8 @@ const TagSelectorComponent = (props: TagSelectorComponentProps) => {
 	const [availableTags, setAvailableTags] = useState(['test', 'test2']);
 	const [newTag, setNewTag] = useState('');
 	const [currentTag, setCurrentTag] = useState('');
-	const [selectedTags, setSelectedTags] = useState([]);
 
-	const { onChange } = props;
+	const { onChange, tags } = props;
 
 	useEffect(() => {
 		fetchTags();
@@ -27,7 +26,7 @@ const TagSelectorComponent = (props: TagSelectorComponentProps) => {
 		<option key={tag}>{tag}</option>
 	));
 
-	const selectedTagComponents = selectedTags.map((tag) => (
+	const selectedTagComponents = tags.map((tag) => (
 		<span
 			key={tag}
 			className="text-lg py-2 px-5 m-2 rounded-full font-bold text-blue-700 bg-gray-200"
@@ -58,13 +57,12 @@ const TagSelectorComponent = (props: TagSelectorComponentProps) => {
 			<button
 				className="shadow bg-blue-500 w-32 h-12 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
 				onClick={() => {
-					if (selectedTags.includes(currentTag)) {
+					if (tags.includes(currentTag)) {
 						return;
 					}
 
-					const newTags = [...selectedTags];
+					const newTags = [...tags];
 					newTags.push(currentTag);
-					setSelectedTags(newTags);
 					onChange(newTags);
 				}}
 			>

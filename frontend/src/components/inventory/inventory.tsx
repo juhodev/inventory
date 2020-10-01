@@ -5,6 +5,7 @@ import SearchComponent from './search';
 import SortComponent from './sort';
 import { Item, SortType } from '../types';
 import { filterSearch } from '../../ts/search';
+import { getInventory } from '../../ts/api';
 
 const { useState, useEffect } = React;
 
@@ -13,15 +14,13 @@ const InventoryComponent = () => {
 	const [selectedItem, setSelectedItem] = useState(-1);
 	const [searchFilter, setSearchFilter] = useState('');
 
-	useEffect(() => {
-		const itemsUrl = `http://${window.location.hostname}:8080/inventory`;
+	const fetchInventory = async () => {
+		const { inventory } = await getInventory();
+		setItems(inventory);
+	};
 
-		fetch(itemsUrl)
-			.then((response) => response.json())
-			.then((data) => {
-				const { inventory } = data;
-				setItems(inventory);
-			});
+	useEffect(() => {
+		fetchInventory();
 	}, []);
 
 	const filteredItems: Item[] = filterSearch(items, searchFilter);

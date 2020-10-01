@@ -6,7 +6,7 @@ export async function addItem(
 	info: string,
 	tags: string[],
 ) {
-	const response = await fetch('http://localhost:8080/inventory/add', {
+	const response = await fetch(`${getURL()}/inventory/add`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export async function addItem(
 }
 
 export async function addTag(tag: string) {
-	const response = await fetch('http://localhost:8080/tags/add', {
+	const response = await fetch(`${getURL()}/tags/add`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
@@ -30,6 +30,15 @@ export async function addTag(tag: string) {
 }
 
 export async function getTags() {
-	const response = await fetch('http://localhost:8080/tags');
+	const response = await fetch(`${getURL()}/tags`);
 	return response.json();
+}
+
+export async function getInventory() {
+	const response = await fetch(`${getURL()}/inventory`);
+	return response.json();
+}
+
+function getURL() {
+	return `http://${window.location.hostname}:8080`;
 }

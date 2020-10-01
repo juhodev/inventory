@@ -21,7 +21,7 @@ module.exports = {
 					'style-loader',
 					'css-loader',
 					'sass-loader',
-					'postcss-loader'
+					'postcss-loader',
 				],
 			},
 		],
@@ -30,6 +30,7 @@ module.exports = {
 		contentBase: path.join(__dirname, './dist'),
 		compress: true,
 		historyApiFallback: true,
+		host: '0.0.0.0',
 		port: 8888,
 	},
 

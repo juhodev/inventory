@@ -4,5 +4,10 @@ module.exports = {
 		fontFamily: {
 			body: 'Balsamiq Sans',
 		},
+		extend: {
+			spacing: {
+				102: '30rem',
+			},
+		},
 	},
 };

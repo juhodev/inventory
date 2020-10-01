@@ -19,5 +19,5 @@ export function filterSearch(items: Item[], userSearch: string): Item[] {
 				: item.tags.some((tag) => tag.startsWith(searchUpperCase))),
 	);
 
-	return filteredItems.sort((a, b) => a.lastUpdate - b.lastUpdate);
+	return filteredItems.sort((a, b) => a.lastUpdate - b.lastUpdate).reverse();
 }

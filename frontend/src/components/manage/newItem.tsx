@@ -62,7 +62,7 @@ const NewItemComponent = () => {
 					title="Info"
 					placeholder="Info about the item"
 					onChange={(value) => {
-						setInfo(info);
+						setInfo(value);
 					}}
 				/>
 			</div>

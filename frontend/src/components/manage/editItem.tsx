@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getInventory } from '../../ts/api';
+import { getInventory, updateItem } from '../../ts/api';
 import { filterSearch } from '../../ts/search';
 import ItemComponent from '../inventory/item';
 import SearchComponent from '../inventory/search';
@@ -26,6 +26,20 @@ const EditItemComponent = () => {
 	const fetchInventory = async () => {
 		const { inventory } = await getInventory();
 		setItems(inventory);
+	};
+
+	const sendItemUpdate = async () => {
+		const response = await updateItem(
+			selectedId,
+			name,
+			location,
+			quantity,
+			link,
+			info,
+			tags,
+		);
+
+		console.log(response);
 	};
 
 	const updateSelectedItem = (item: Item) => {
@@ -84,7 +98,6 @@ const EditItemComponent = () => {
 						placeholder="Item name"
 						value={name}
 						onChange={(value) => {
-							setSelectedId(-1);
 							setName(value);
 						}}
 					/>
@@ -93,7 +106,6 @@ const EditItemComponent = () => {
 						placeholder="Item location"
 						value={location}
 						onChange={(value) => {
-							setSelectedId(-1);
 							setLocation(value);
 						}}
 					/>
@@ -102,7 +114,6 @@ const EditItemComponent = () => {
 						placeholder="0"
 						value={quantity}
 						onChange={(value) => {
-							setSelectedId(-1);
 							setQuantity(value);
 						}}
 					/>
@@ -111,7 +122,6 @@ const EditItemComponent = () => {
 						placeholder="https://google.com"
 						value={link}
 						onChange={(value) => {
-							setSelectedId(-1);
 							setLink(value);
 						}}
 					/>
@@ -121,7 +131,6 @@ const EditItemComponent = () => {
 							placeholder="Info about the item"
 							value={info}
 							onChange={(value) => {
-								setSelectedId(-1);
 								setInfo(value);
 							}}
 						/>
@@ -134,7 +143,7 @@ const EditItemComponent = () => {
 				</div>
 				<button
 					className="shadow bg-blue-500 ml-6 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
-					onClick={() => {}}
+					onClick={sendItemUpdate}
 				>
 					UPDATE
 				</button>

@@ -19,4 +19,15 @@ router.post('/add', (req, res) => {
 	res.json(response);
 });
 
+router.post('/updateItem', (req, res) => {
+	const { body } = req;
+	const { id, name, info, location, img, count, link, tags } = body;
+
+	const response: ItemInventoryResponse = itemManager
+		.getInventory()
+		.updateItem(id, name, info, location, img, count, link, tags);
+
+	res.json(response);
+});
+
 export default router;

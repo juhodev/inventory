@@ -1,5 +1,6 @@
 import { Item, ItemInventoryFullData, ItemInventoryResponse } from './types';
 import * as fs from 'fs';
+import { itemManager } from '..';
 
 export default class ItemInventory {
 	private items: Map<string, Item>;
@@ -31,6 +32,10 @@ export default class ItemInventory {
 		}
 
 		this.itemIdCounter = fullData.itemIdCounter;
+
+		// I should also update the history here because the inventory file
+		// might have been edited before starting the server
+		itemManager.getItemHistory().update(this);
 	}
 
 	add(
@@ -62,6 +67,7 @@ export default class ItemInventory {
 		});
 
 		this.writeToDisk();
+		itemManager.getItemHistory().update(this);
 
 		return {
 			error: false,
@@ -92,6 +98,7 @@ export default class ItemInventory {
 		});
 
 		this.writeToDisk();
+		itemManager.getItemHistory().update(this);
 
 		return {
 			error: false,

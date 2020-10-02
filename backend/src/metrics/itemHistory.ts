@@ -40,7 +40,7 @@ export default class ItemHistory {
 		// will inflate this but who cares still a neat metric I guess.
 		let totalItems: number = 0;
 
-        debugger;
+		debugger;
 		for (const item of items) {
 			totalItems += item.count;
 		}
@@ -66,6 +66,10 @@ export default class ItemHistory {
 
 		this.itemCountHistory.push(itemCount);
 		this.writeToDisk();
+	}
+
+	getAll(): ItemCount[] {
+		return this.itemCountHistory;
 	}
 
 	private writeToDisk() {

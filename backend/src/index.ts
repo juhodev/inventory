@@ -4,6 +4,7 @@ import * as cors from 'cors';
 
 import InventoryRouter from './routes/inventoryRoute';
 import TagsRouter from './routes/tagsRoute';
+import MetricsRouter from './routes/metricsRoute';
 
 import ItemManager from './itemManager';
 
@@ -21,6 +22,7 @@ itemManager.load();
 
 app.use('/inventory', InventoryRouter);
 app.use('/tags', TagsRouter);
+app.use('/metrics', MetricsRouter);
 
 const HTTP_PORT = 8080;
 

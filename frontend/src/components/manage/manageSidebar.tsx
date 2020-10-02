@@ -10,10 +10,12 @@ const ManageSidebarComponent = (props: ManageSidebarComponentProps) => {
 	const tabs = ['New', 'Edit'];
 
 	const tabComponents: JSX.Element[] = tabs.map((tab) => {
-		let className = 'text-lg cursor-pointer mb-3';
+		let className = 'text-2xl cursor-pointer mb-3';
 
 		if (currentTab === tab) {
-			className += ' font-bold';
+			className += ' font-bold text-blue-500';
+		} else {
+			className += ' text-gray-200';
 		}
 
 		return (

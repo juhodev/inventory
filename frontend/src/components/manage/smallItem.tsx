@@ -12,17 +12,19 @@ const SmallItemComponent = (props: SmallItemComponentProps) => {
 		tags === undefined
 			? []
 			: tags.map((tag) => (
-					<span
-						key={tag}
-						className="text-xs py-1 px-3 m-1 h-6 rounded-full font-bold text-blue-700 bg-gray-200"
-					>
-						{tag}
-					</span>
+					<div className="">
+						<span
+							key={tag}
+							className="text-xs py-1 px-3 m-1 h-6 rounded-full font-bold bg-blue-500 text-gray-300"
+						>
+							{tag}
+						</span>
+					</div>
 			  ));
 
 	return (
 		<div
-			className="container flex flex-row h-24 mx-auto px-2 p-3 border-b-2 border-indigo-600 font-body cursor-pointer"
+			className="container flex flex-row h-24 px-2 p-3 border-b-2 border-indigo-600 font-body cursor-pointer"
 			onClick={onClick}
 		>
 			<div className="flex justify-center items-center w-12 h-12">

@@ -5,6 +5,7 @@ const NavigationComponent = () => {
 	const paths = [
 		{ to: '/', name: 'Inventory' },
 		{ to: '/manage', name: 'Manage' },
+		{ to: '/metrics', name: 'Metrics' },
 	];
 
 	const { pathname } = window.location;

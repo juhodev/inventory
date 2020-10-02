@@ -9,15 +9,87 @@ import { Item } from '../components/types';
  */
 export function filterSearch(items: Item[], userSearch: string): Item[] {
 	const searchUpperCase = userSearch.toUpperCase();
+	const searchItems: Item[] = doSearch(searchUpperCase, items);
 
-	const filteredItems: Item[] = items.filter(
-		(item) =>
-			item.name.toUpperCase().startsWith(searchUpperCase) ||
-			// This is a quick fix plase fix this later.
-			(item.tags === undefined
-				? false
-				: item.tags.some((tag) => tag.startsWith(searchUpperCase))),
-	);
+	return searchItems.sort((a, b) => a.lastUpdate - b.lastUpdate).reverse();
+}
 
-	return filteredItems.sort((a, b) => a.lastUpdate - b.lastUpdate).reverse();
+function doSearch(searchUpperCase: string, items: Item[]): Item[] {
+	if (searchUpperCase.length === 0) {
+		return items;
+	}
+
+	// Is the user search doesn't contain a ":" that means that we want to match _everything_
+	// If it does contain a ":" then we want to only match with the type the user supplied before the ":" char
+	const isGlobalSearch: boolean = !searchUpperCase.includes(':');
+
+	if (isGlobalSearch) {
+		return globalSearch(searchUpperCase, items);
+	}
+
+	// Need to do this rather than just a split because we only want to
+	// split the string only once because there might be a colon in the
+	// name of the item the user is search for
+	const firstIndexOfColon: number = searchUpperCase.indexOf(':');
+	const searchType: string = searchUpperCase.substr(0, firstIndexOfColon);
+	const searchValue: string = searchUpperCase
+		.substr(firstIndexOfColon + 1, searchUpperCase.length)
+		.trim()
+		.toUpperCase();
+
+	console.log(searchType, searchValue);
+
+	switch (searchType) {
+		case 'TAG':
+			return tagSearch(searchValue, items);
+
+		case 'NAME':
+			return nameSearch(searchValue, items);
+
+		default:
+			return [];
+	}
+}
+
+/**
+ * Global search matches with the item name and the item tags
+ *
+ * @param searchUpperCase The search the user used
+ * @param items All the items in the user's inventory
+ */
+function globalSearch(searchUpperCase: string, items: Item[]): Item[] {
+	return items.filter((item) => {
+		const { name, tags } = item;
+		const upperCaseName: string = name.toUpperCase();
+
+		// If it already matches with the name then we can just return true
+		if (upperCaseName.startsWith(searchUpperCase)) {
+			return true;
+		}
+
+		if (tags !== undefined) {
+			return tags.some((tag) => tag.startsWith(searchUpperCase));
+		}
+	});
+}
+
+function tagSearch(searchUpperCase: string, items: Item[]): Item[] {
+	return items.filter((item) => {
+		const { tags } = item;
+
+		if (tags === undefined) {
+			return false;
+		}
+
+		return tags.some((tag) => tag.startsWith(searchUpperCase));
+	});
+}
+
+function nameSearch(searchUpperCase: string, items: Item[]): Item[] {
+	return items.filter((item) => {
+		const { name } = item;
+		const nameUpperCase: string = name.toUpperCase();
+
+		return nameUpperCase.startsWith(searchUpperCase);
+	});
 }

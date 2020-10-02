@@ -6,9 +6,9 @@ const TextAreaComponent = (props: TextAreaComponentProps) => {
 
 	return (
 		<div className="flex flex-col font-body col-span-2">
-			<span className="text-xl font-bold">{title}</span>
+			<span className="text-xl font-bold text-gray-200">{title}</span>
 			<textarea
-				className="border border-gray-400 rounded w-full p-2 bg-gray-100"
+				className="border-0 border-b-2 border-indigo-600 p-2 bg-transparent text-gray-200 placeholder-gray-400"
 				placeholder={placeholder}
 				value={value}
 				onChange={(e) => {

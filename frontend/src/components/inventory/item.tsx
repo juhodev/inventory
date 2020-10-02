@@ -13,7 +13,7 @@ const ItemComponent = (props: ItemComponentProps) => {
 			: tags.map((tag) => (
 					<span
 						key={tag}
-						className="text-lg py-2 px-5 m-2 h-10 rounded-full font-bold text-blue-700 bg-gray-200"
+						className="text-lg py-2 px-5 m-2 h-10 rounded-full font-bold text-gray-300 bg-blue-500"
 					>
 						{tag}
 					</span>
@@ -39,17 +39,17 @@ const ItemComponent = (props: ItemComponentProps) => {
 					<span className="font-bold text-3xl leading-none text-blue-500">
 						{name}
 					</span>
-					<span className="text-xl text-gray-500">
+					<span className="text-xl text-gray-400">
 						Last updated {timeSince(new Date(lastUpdate))} ago
 					</span>
 				</div>
 				<div className="flex h-full text-xl">
-					<span className="self-end">Location</span>
-					<span className="self-end px-3 text-gray-500">
+					<span className="self-end text-gray-200">Location</span>
+					<span className="self-end px-3 text-gray-400">
 						{location}
 					</span>
-					<span className="self-end pr-3">Quantity</span>
-					<span className="self-end text-gray-500">{count}</span>
+					<span className="self-end pr-3 text-gray-200">Quantity</span>
+					<span className="self-end text-gray-400">{count}</span>
 				</div>
 			</div>
 			<div className="flex flex-grow flex-wrap justify-end">{tagComponents}</div>

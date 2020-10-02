@@ -6,10 +6,10 @@ const SortComponent = (props: SortComponentProps) => {
 
 	return (
 		<div className="flex flex-row font-body p-6 text-xl">
-			<label htmlFor="sort-by-select" className="pr-3 text-gray-500">Sort by</label>
+			<label htmlFor="sort-by-select" className="pr-3 font-bold text-gray-200">Sort by</label>
 			<select
 				id="sort-by-select"
-				className="block appearance-none bg-white border-0 font-bold focus:outline-none"
+				className="block bg-transparent appearance-none border-0 focus:outline-none text-blue-500"
 				onChange={(e) => onChange(e.target.value as SortType)}
 			>
 				<option>{SortType.LAST_UPDATED}</option>

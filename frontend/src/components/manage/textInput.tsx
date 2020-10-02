@@ -6,9 +6,9 @@ const TextInputComponent = (props: TextInputComponentProps) => {
 
 	return (
 		<div className="flex flex-col font-body">
-			<span className="text-xl font-bold">{title}</span>
+			<span className="text-xl font-bold text-gray-200">{title}</span>
 			<input
-				className="border border-gray-400 rounded w-80 p-2 bg-gray-100"
+				className="border-0 border-b-2 border-indigo-600 w-80 mt-1 text-gray-200 placeholder-gray-400 h-12 bg-transparent"
 				placeholder={placeholder}
 				value={value}
 				onChange={(e) => {

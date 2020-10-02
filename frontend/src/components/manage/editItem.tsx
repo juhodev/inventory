@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { getInventory, updateItem } from '../../ts/api';
 import { filterSearch } from '../../ts/search';
-import ItemComponent from '../inventory/item';
 import SearchComponent from '../inventory/search';
 import { Item } from '../types';
 import SmallItemComponent from './smallItem';
@@ -81,7 +80,7 @@ const EditItemComponent = () => {
 
 	return (
 		<div className="font-body pl-24 flex flex-row flex-shrink-1 h-4/5">
-			<div className="pt-12 w-1/3">
+			<div className="pt-12">
 				<SearchComponent
 					onChange={(search) => {
 						setSearchFilter(search);
@@ -91,8 +90,8 @@ const EditItemComponent = () => {
 					{itemComponents}
 				</div>
 			</div>
-			<div>
-				<div className="pl-6 pt-12 grid grid-cols-2 grid-flow-row gap-4">
+			<div className="pl-6">
+				<div className="pt-12 grid grid-cols-2 grid-flow-row gap-4">
 					<TextInputComponent
 						title="Name"
 						placeholder="Item name"
@@ -125,23 +124,21 @@ const EditItemComponent = () => {
 							setLink(value);
 						}}
 					/>
-					<div className="col-span-2 w-4/5">
-						<TextAreaComponent
-							title="Info"
-							placeholder="Info about the item"
-							value={info}
-							onChange={(value) => {
-								setInfo(value);
-							}}
-						/>
-					</div>
-					<TagSelectorComponent
-						tags={tags}
-						onChange={(tags) => {
-							setTags(tags);
+					<TextAreaComponent
+						title="Info"
+						placeholder="Info about the item"
+						value={info}
+						onChange={(value) => {
+							setInfo(value);
 						}}
 					/>
 				</div>
+				<TagSelectorComponent
+					tags={tags}
+					onChange={(tags) => {
+						setTags(tags);
+					}}
+				/>
 				<button
 					className="shadow bg-blue-500 ml-6 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
 					onClick={sendItemUpdate}

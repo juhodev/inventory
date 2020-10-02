@@ -39,6 +39,9 @@ const InventoryComponent = () => {
 				key={item.id}
 				item={item}
 				onClick={() => updateSelectedItem(item)}
+				onTagClick={(tag) => {
+					setSearchFilter(`tag:${tag}`);
+				}}
 			/>
 		);
 	});
@@ -52,6 +55,7 @@ const InventoryComponent = () => {
 					}}
 				/>
 				<SearchComponent
+					value={searchFilter}
 					onChange={(search) => {
 						setSearchFilter(search);
 					}}

@@ -1,26 +1,20 @@
 import * as React from 'react';
 import { SearchComponentProps } from '../types';
 
-const { useState } = React;
-
 const SearchComponent = (props: SearchComponentProps) => {
-	const [search, setSearch] = useState('');
-	const { onChange } = props;
+	const { onChange, value } = props;
 
 	return (
-        <div className="flex flex-grow justify-center">
-            <input
-                className="border border-blue-800 h-10 p-2 font-body rounded w-80 bg-blue-500 text-gray-200"
-                placeholder="Search..."
-                value={search}
-                onChange={(e) => {
-                    const { value } = e.target;
-    
-                    setSearch(value);
-                    onChange(value);
-                }}
-            />
-        </div>
+		<div className="flex flex-grow justify-center">
+			<input
+				className="border border-blue-800 h-10 p-2 font-body rounded w-80 bg-blue-500 text-gray-200"
+				placeholder="Search..."
+				value={value}
+				onChange={(e) => {
+					onChange(e.target.value);
+				}}
+			/>
+		</div>
 	);
 };
 

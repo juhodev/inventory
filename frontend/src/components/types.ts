@@ -13,6 +13,7 @@ export interface Item {
 export interface ItemComponentProps {
 	item: Item;
 	onClick: () => void;
+	onTagClick: (tag: string) => void;
 }
 
 export interface ItemInfoComponentProps {
@@ -28,6 +29,7 @@ export enum SortType {
 }
 
 export interface SearchComponentProps {
+	value: string;
 	onChange: (search: string) => void;
 }
 

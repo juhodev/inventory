@@ -17,6 +17,10 @@ export default class ItemManager {
 		this.inventory.load();
 		this.tags.load();
 		this.itemHistory.load();
+
+		// I should also update the history here because the inventory file
+		// might have been edited before starting the server
+		this.itemHistory.update(this.inventory);
 	}
 
 	getInventory(): ItemInventory {

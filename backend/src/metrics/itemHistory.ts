@@ -25,7 +25,6 @@ export default class ItemHistory {
 			'utf-8',
 		);
 		const fullData: ItemCount[] = JSON.parse(fileString);
-
 		this.itemCountHistory = fullData;
 	}
 

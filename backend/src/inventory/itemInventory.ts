@@ -32,10 +32,6 @@ export default class ItemInventory {
 		}
 
 		this.itemIdCounter = fullData.itemIdCounter;
-
-		// I should also update the history here because the inventory file
-		// might have been edited before starting the server
-		itemManager.getItemHistory().update(this);
 	}
 
 	add(

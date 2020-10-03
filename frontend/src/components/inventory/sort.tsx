@@ -19,6 +19,7 @@ const SortComponent = (props: SortComponentProps) => {
 			>
 				<option>{SortType.LAST_UPDATED}</option>
 				<option>{SortType.NAME}</option>
+				<option>{SortType.LOCATION}</option>
 			</select>
 		</div>
 	);

@@ -26,6 +26,9 @@ function sortItems(items: Item[], sortType: SortType): Item[] {
 		case SortType.NAME:
 			return items.sort((a, b) => a.name.localeCompare(b.name));
 
+		case SortType.LOCATION:
+			return items.sort((a, b) => a.location.localeCompare(b.location));
+
 		default:
 			return items;
 	}

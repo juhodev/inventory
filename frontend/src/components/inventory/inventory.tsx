@@ -13,6 +13,7 @@ const InventoryComponent = () => {
 	const [items, setItems] = useState([]);
 	const [selectedItem, setSelectedItem] = useState(undefined);
 	const [searchFilter, setSearchFilter] = useState('');
+	const [sortType, setSortType] = useState<SortType>(SortType.LAST_UPDATED);
 
 	const fetchInventory = async () => {
 		const { inventory } = await getInventory();
@@ -32,7 +33,7 @@ const InventoryComponent = () => {
 		fetchInventory();
 	}, []);
 
-	const filteredItems: Item[] = filterSearch(items, searchFilter);
+	const filteredItems: Item[] = filterSearch(items, searchFilter, sortType);
 	const itemComponents = filteredItems.map((item) => {
 		return (
 			<ItemComponent
@@ -51,7 +52,7 @@ const InventoryComponent = () => {
 			<div className="flex flex-row items-center">
 				<SortComponent
 					onChange={(sortType: SortType) => {
-						console.log(sortType);
+						setSortType(sortType);
 					}}
 				/>
 				<SearchComponent

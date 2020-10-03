@@ -2,7 +2,7 @@ import * as React from 'react';
 import { getInventory, updateItem } from '../../ts/api';
 import { filterSearch } from '../../ts/search';
 import SearchComponent from '../inventory/search';
-import { Item } from '../types';
+import { Item, SortType } from '../types';
 import SmallItemComponent from './smallItem';
 import TagSelectorComponent from './tagsSelector';
 import TextAreaComponent from './textArea';
@@ -69,7 +69,11 @@ const EditItemComponent = () => {
 		fetchInventory();
 	}, []);
 
-	const filteredItems: Item[] = filterSearch(items, searchFilter);
+	const filteredItems: Item[] = filterSearch(
+		items,
+		searchFilter,
+		SortType.LAST_UPDATED,
+	);
 	const itemComponents = filteredItems.map((item) => (
 		<SmallItemComponent
 			key={item.id}

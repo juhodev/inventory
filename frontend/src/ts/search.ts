@@ -1,4 +1,4 @@
-import { Item } from '../components/types';
+import { Item, SortType } from '../components/types';
 
 /**
  * Now filterSearch matches item names AND tags. This should later be changed
@@ -7,11 +7,28 @@ import { Item } from '../components/types';
  * @param items All the items in the inventory
  * @param userSearch The search term the user has provided
  */
-export function filterSearch(items: Item[], userSearch: string): Item[] {
+export function filterSearch(
+	items: Item[],
+	userSearch: string,
+	sortType: SortType,
+): Item[] {
 	const searchUpperCase = userSearch.toUpperCase();
 	const searchItems: Item[] = doSearch(searchUpperCase, items);
 
-	return searchItems.sort((a, b) => a.lastUpdate - b.lastUpdate).reverse();
+	return sortItems(searchItems, sortType);
+}
+
+function sortItems(items: Item[], sortType: SortType): Item[] {
+	switch (sortType) {
+		case SortType.LAST_UPDATED:
+			return items.sort((a, b) => a.lastUpdate - b.lastUpdate).reverse();
+
+		case SortType.NAME:
+			return items.sort((a, b) => a.name.localeCompare(b.name));
+
+		default:
+			return items;
+	}
 }
 
 function doSearch(searchUpperCase: string, items: Item[]): Item[] {

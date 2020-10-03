@@ -26,6 +26,7 @@ export interface SortComponentProps {
 
 export enum SortType {
 	LAST_UPDATED = 'Last updated',
+	NAME = 'Name',
 }
 
 export interface SearchComponentProps {

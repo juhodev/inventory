@@ -52,7 +52,10 @@ const ItemHistoryMetricsComponent = () => {
 				<span className="text-3xl text-blue-500">
 					Item quantity history
 				</span>
-				<Line data={data} />
+				<Line
+					data={data}
+					options={{ scales: { yAxes: [{ ticks: { min: 0 } }] } }}
+				/>
 			</div>
 		</div>
 	);

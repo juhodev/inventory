@@ -74,6 +74,10 @@ export async function updateItem(
 	return response.json();
 }
 
+export async function getMetrics() {
+	return await (await fetch(`${getURL()}/metrics`)).json();
+}
+
 function getURL() {
 	return `http://${window.location.hostname}:8080`;
 }

@@ -57,8 +57,6 @@ function doSearch(searchUpperCase: string, items: Item[]): Item[] {
 		.trim()
 		.toUpperCase();
 
-	console.log(searchType, searchValue);
-
 	switch (searchType) {
 		case 'TAG':
 			return tagSearch(searchValue, items);

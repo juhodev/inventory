@@ -26,6 +26,7 @@ const ItemHistoryMetricsComponent = () => {
 			fill: false,
 			lineTension: 0.1,
 			backgroundColor: '#edf2f7',
+			color: '#ff00ff',
 			data: [],
 		};
 	};

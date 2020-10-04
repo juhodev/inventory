@@ -64,6 +64,10 @@ function doSearch(searchUpperCase: string, items: Item[]): Item[] {
 		case 'NAME':
 			return nameSearch(searchValue, items);
 
+		case 'LOCATION':
+		case 'LOC':
+			return locationSearch(searchValue, items);
+
 		default:
 			return [];
 	}
@@ -100,6 +104,15 @@ function tagSearch(searchUpperCase: string, items: Item[]): Item[] {
 		}
 
 		return tags.some((tag) => tag.startsWith(searchUpperCase));
+	});
+}
+
+function locationSearch(searchUpperCase: string, items: Item[]): Item[] {
+	return items.filter((item) => {
+		const { location } = item;
+		const locationUpperCase: string = location.toUpperCase();
+
+		return locationUpperCase.startsWith(searchUpperCase);
 	});
 }
 

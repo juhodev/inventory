@@ -63,12 +63,14 @@ const InventoryComponent = () => {
 				/>
 			</div>
 			<div className="flex flex-row h-4/5">
-				<div className="flex flex-col w-full h-full overflow-y-scroll">
+				<div className="flex flex-col w-2/3 h-full overflow-y-scroll">
 					{itemComponents}
 				</div>
-				{selectedItem !== undefined && (
-					<ItemInfoComponent item={selectedItem} />
-				)}
+				<div className="w-1/3 justify-center">
+					{selectedItem !== undefined && (
+						<ItemInfoComponent item={selectedItem} />
+					)}
+				</div>
 			</div>
 		</div>
 	);

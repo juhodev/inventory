@@ -24,6 +24,10 @@ module.exports = {
 					'postcss-loader',
 				],
 			},
+			{
+				test: /\.css$/,
+				use: ['css-loader'],
+			},
 		],
 	},
 	devServer: {

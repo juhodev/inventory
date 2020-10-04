@@ -71,3 +71,8 @@ export interface NewItem {
 	info: string;
 	tags: string[];
 }
+
+export interface ItemInventoryResponse {
+	error: boolean;
+	message: string;
+}

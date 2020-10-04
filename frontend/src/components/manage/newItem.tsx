@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { addItem } from '../../ts/api';
-import { Item, NewItem } from '../types';
+import { ItemInventoryResponse, NewItem } from '../types';
 import TagSelectorComponent from './tagsSelector';
 import TextAreaComponent from './textArea';
 import TextInputComponent from './textInput';
@@ -16,24 +16,32 @@ const NewItemComponent = () => {
 		link: '',
 		tags: [],
 	});
+	const [error, setError] = useState('');
 
 	const sendAddItem = async () => {
-		await addItem(item);
+		const response: ItemInventoryResponse = await addItem(item);
 
-		setItem({
-			name: '',
-			count: 0,
-			location: '',
-			info: '',
-			link: '',
-			tags: [],
-		});
+		const { error, message } = response;
+
+		if (error) {
+			setError(message);
+			return;
+		}
+
+		// The best 'feedback' for creating an item is to show the inventory and because currently by default it's
+		// sorted by last updated it will display the lastly created item first. In the future we should most likely
+		// also select it (display it on the side)
+		window.location.replace('/');
 	};
 
 	const updateItem = (key: string, value: string | number | string[]) => {
 		const newItem: NewItem = Object.assign({}, item);
 		newItem[key] = value;
 		setItem(newItem);
+
+		if (error.length > 0) {
+			setError('');
+		}
 	};
 
 	const { name, count, location, info, link, tags } = item;
@@ -76,12 +84,17 @@ const NewItemComponent = () => {
 				tags={tags}
 				onChange={(tags) => updateItem('tags', tags)}
 			/>
-			<button
-				className="shadow bg-blue-500 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
-				onClick={sendAddItem}
-			>
-				CREATE
-			</button>
+			<div>
+				<button
+					className="shadow bg-blue-500 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
+					onClick={sendAddItem}
+				>
+					CREATE
+				</button>
+				{error.length > 0 && (
+					<span className="px-3 text-lg text-red-500">{error}</span>
+				)}
+			</div>
 		</div>
 	);
 };

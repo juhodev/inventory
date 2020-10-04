@@ -29,6 +29,18 @@ const InventoryComponent = () => {
 		setSelectedItem(item);
 	};
 
+	const updateSearchFilter = (tag: string) => {
+		const newFilter: string = `tag:${tag}`;
+
+		// If the the user is already searching for the tag then we should clear the search field
+		if (searchFilter === newFilter) {
+			setSearchFilter('');
+			return;
+		}
+
+		setSearchFilter(newFilter);
+	};
+
 	useEffect(() => {
 		fetchInventory();
 	}, []);
@@ -40,9 +52,7 @@ const InventoryComponent = () => {
 				key={item.id}
 				item={item}
 				onClick={() => updateSelectedItem(item)}
-				onTagClick={(tag) => {
-					setSearchFilter(`tag:${tag}`);
-				}}
+				onTagClick={(tag) => updateSearchFilter(tag)}
 			/>
 		);
 	});

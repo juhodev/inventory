@@ -2,7 +2,7 @@ import * as React from 'react';
 import { getInventory, updateItem } from '../../ts/api';
 import { filterSearch } from '../../ts/search';
 import SearchComponent from '../inventory/search';
-import { Item, SortType } from '../types';
+import { EditItem, Item, ItemInventoryResponse, SortType } from '../types';
 import SmallItemComponent from './smallItem';
 import TagSelectorComponent from './tagsSelector';
 import TextAreaComponent from './textArea';
@@ -11,34 +11,47 @@ import TextInputComponent from './textInput';
 const { useState, useEffect } = React;
 
 const EditItemComponent = () => {
-	const [items, setItems] = useState([]);
-	const [searchFilter, setSearchFilter] = useState('');
-	const [selectedId, setSelectedId] = useState(-1);
+	const [items, setItems] = useState<Item[]>([]);
+	const [searchFilter, setSearchFilter] = useState<string>('');
+	const [selectedId, setSelectedId] = useState<number>(-1);
+	const [error, setError] = useState<string>('');
 
-	const [name, setName] = useState('');
-	const [location, setLocation] = useState('');
-	const [quantity, setQuantity] = useState('');
-	const [link, setLink] = useState('');
-	const [info, setInfo] = useState('');
-	const [tags, setTags] = useState([]);
+	const [item, setItem] = useState<EditItem>({
+		id: -1,
+		name: '',
+		tags: [],
+		link: '',
+		count: 0,
+		info: '',
+		location: '',
+	});
 
 	const fetchInventory = async () => {
 		const { inventory } = await getInventory();
 		setItems(inventory);
 	};
 
-	const sendItemUpdate = async () => {
-		const response = await updateItem(
-			selectedId,
-			name,
-			location,
-			quantity,
-			link,
-			info,
-			tags,
-		);
+	const localItemUpdate = (
+		key: string,
+		value: string | number | string[],
+	) => {
+		const newItem: EditItem = Object.assign({}, item);
+		newItem[key] = value;
+		setItem(newItem);
 
-		console.log(response);
+		if (error.length > 0) {
+			setError('');
+		}
+	};
+
+	const sendItemUpdate = async () => {
+		const response: ItemInventoryResponse = await updateItem(item);
+		const { error, message } = response;
+
+		if (error) {
+			setError(message);
+			return;
+		}
 	};
 
 	const updateSelectedItem = (item: Item) => {
@@ -47,27 +60,29 @@ const EditItemComponent = () => {
 			return;
 		}
 
-		setName(item.name);
-		setLocation(item.location);
-		setQuantity(item.count + '');
-		setLink(item.link);
-		setInfo(item.info);
-		setTags(item.tags);
-		setSelectedId(item.id);
+		const { id, name, tags, link, count, info, location } = item;
+		setItem({ id, name, tags, link, count, info, location });
+		setSelectedId(id);
 	};
 
 	const clearInputs = () => {
-		setName('');
-		setLocation('');
-		setQuantity('');
-		setLink('');
-		setInfo('');
-		setTags([]);
+		setSelectedId(-1);
+		setItem({
+			id: -1,
+			name: '',
+			tags: [],
+			link: '',
+			count: 0,
+			info: '',
+			location: '',
+		});
 	};
 
 	useEffect(() => {
 		fetchInventory();
 	}, []);
+
+	const { name, tags, link, count, info, location } = item;
 
 	const filteredItems: Item[] = filterSearch(
 		items,
@@ -101,55 +116,46 @@ const EditItemComponent = () => {
 						title="Name"
 						placeholder="Item name"
 						value={name}
-						onChange={(value) => {
-							setName(value);
-						}}
+						onChange={(value) => localItemUpdate('name', value)}
 					/>
 					<TextInputComponent
 						title="Location"
 						placeholder="Item location"
 						value={location}
-						onChange={(value) => {
-							setLocation(value);
-						}}
+						onChange={(value) => localItemUpdate('location', value)}
 					/>
 					<TextInputComponent
 						title="Quantity"
 						placeholder="0"
-						value={quantity}
-						onChange={(value) => {
-							setQuantity(value);
-						}}
+						value={count.toString()}
+						onChange={(value) => localItemUpdate('count', value)}
 					/>
 					<TextInputComponent
 						title="Link"
 						placeholder="https://google.com"
 						value={link}
-						onChange={(value) => {
-							setLink(value);
-						}}
+						onChange={(value) => localItemUpdate('link', value)}
 					/>
 					<TextAreaComponent
 						title="Info"
 						placeholder="Info about the item"
 						value={info}
-						onChange={(value) => {
-							setInfo(value);
-						}}
+						onChange={(value) => localItemUpdate('info', value)}
 					/>
 				</div>
 				<TagSelectorComponent
 					tags={tags}
-					onChange={(tags) => {
-						setTags(tags);
-					}}
+					onChange={(tags) => localItemUpdate('tags', tags)}
 				/>
-				<button
-					className="shadow bg-blue-500 ml-6 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
-					onClick={sendItemUpdate}
-				>
-					UPDATE
-				</button>
+				<div>
+					<button
+						className="shadow bg-blue-500 px-3 pt-2 pb-2 rounded-lg text-white mt-6"
+						onClick={sendItemUpdate}
+					>
+						UPDATE
+					</button>
+					<span className="px-3 text-lg text-red-500">{error}</span>
+				</div>
 			</div>
 		</div>
 	);

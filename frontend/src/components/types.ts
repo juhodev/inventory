@@ -72,6 +72,16 @@ export interface NewItem {
 	tags: string[];
 }
 
+export interface EditItem {
+	id: number;
+	name: string;
+	location: string;
+	count: number;
+	link: string;
+	info: string;
+	tags: string[];
+}
+
 export interface ItemInventoryResponse {
 	error: boolean;
 	message: string;

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { addItem } from '../../ts/api';
+import { Item, NewItem } from '../types';
 import TagSelectorComponent from './tagsSelector';
 import TextAreaComponent from './textArea';
 import TextInputComponent from './textInput';
@@ -7,25 +8,35 @@ import TextInputComponent from './textInput';
 const { useState } = React;
 
 const NewItemComponent = () => {
-	const [name, setName] = useState('');
-	const [location, setLocation] = useState('');
-	const [quantity, setQuantity] = useState('0');
-	const [link, setLink] = useState('');
-	const [info, setInfo] = useState('');
-	const [tags, setTags] = useState([]);
+	const [item, setItem] = useState<NewItem>({
+		name: '',
+		count: 0,
+		location: '',
+		info: '',
+		link: '',
+		tags: [],
+	});
 
 	const sendAddItem = async () => {
-		const response = await addItem(
-			name,
-			location,
-			quantity,
-			link,
-			info,
-			tags,
-		);
+		await addItem(item);
 
-		console.log(response);
+		setItem({
+			name: '',
+			count: 0,
+			location: '',
+			info: '',
+			link: '',
+			tags: [],
+		});
 	};
+
+	const updateItem = (key: string, value: string | number | string[]) => {
+		const newItem: NewItem = Object.assign({}, item);
+		newItem[key] = value;
+		setItem(newItem);
+	};
+
+	const { name, count, location, info, link, tags } = item;
 
 	return (
 		<div className="font-body pl-24">
@@ -34,48 +45,36 @@ const NewItemComponent = () => {
 					title="Name"
 					placeholder="Item name"
 					value={name}
-					onChange={(value) => {
-						setName(value);
-					}}
+					onChange={(value) => updateItem('name', value)}
 				/>
 				<TextInputComponent
 					title="Location"
 					placeholder="Item location"
 					value={location}
-					onChange={(value) => {
-						setLocation(value);
-					}}
+					onChange={(value) => updateItem('location', value)}
 				/>
 				<TextInputComponent
 					title="Quantity"
 					placeholder="0"
-					value={quantity}
-					onChange={(value) => {
-						setQuantity(value);
-					}}
+					value={count.toString()}
+					onChange={(value) => updateItem('count', value)}
 				/>
 				<TextInputComponent
 					title="Link"
 					placeholder="https://google.com"
 					value={link}
-					onChange={(value) => {
-						setLink(value);
-					}}
+					onChange={(value) => updateItem('link', value)}
 				/>
 				<TextAreaComponent
 					title="Info"
 					placeholder="Info about the item"
 					value={info}
-					onChange={(value) => {
-						setInfo(value);
-					}}
+					onChange={(value) => updateItem('info', value)}
 				/>
 			</div>
 			<TagSelectorComponent
 				tags={tags}
-				onChange={(tags) => {
-					setTags(tags);
-				}}
+				onChange={(tags) => updateItem('tags', tags)}
 			/>
 			<button
 				className="shadow bg-blue-500 px-3 pt-2 pb-2 rounded-lg text-white mt-6"

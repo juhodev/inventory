@@ -62,3 +62,12 @@ export interface SmallItemComponentProps {
 	item: Item;
 	onClick: () => void;
 }
+
+export interface NewItem {
+	name: string;
+	location: string;
+	count: number;
+	link: string;
+	info: string;
+	tags: string[];
+}

@@ -1,24 +1,12 @@
-export async function addItem(
-	name: string,
-	location: string,
-	quantity: string,
-	link: string,
-	info: string,
-	tags: string[],
-) {
+import { NewItem } from '../components/types';
+
+export async function addItem(item: NewItem) {
 	const response = await fetch(`${getURL()}/inventory/add`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({
-			count: quantity,
-			name,
-			location,
-			link,
-			info,
-			tags,
-		}),
+		body: JSON.stringify(item),
 	});
 
 	return response.json();

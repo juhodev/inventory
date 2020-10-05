@@ -30,4 +30,15 @@ router.post('/updateItem', (req, res) => {
 	res.json(response);
 });
 
+router.delete('/remove', (req, res) => {
+	const { body } = req;
+	const { name } = body;
+
+	const response: ItemInventoryResponse = itemManager
+		.getInventory()
+		.remove(name);
+
+	res.json(response);
+});
+
 export default router;

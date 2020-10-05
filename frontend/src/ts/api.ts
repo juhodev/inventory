@@ -50,6 +50,18 @@ export async function getMetrics() {
 	return await (await fetch(`${getURL()}/metrics`)).json();
 }
 
+export async function removeItem(name: string) {
+	const response = await fetch(`${getURL()}/inventory/remove`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ name }),
+	});
+
+	return response.json();
+}
+
 function getURL() {
 	return `http://${window.location.hostname}:8080`;
 }

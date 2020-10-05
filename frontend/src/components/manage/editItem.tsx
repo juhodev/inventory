@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getInventory, updateItem } from '../../ts/api';
+import { getInventory, removeItem, updateItem } from '../../ts/api';
 import { filterSearch } from '../../ts/search';
 import SearchComponent from '../inventory/search';
 import { EditItem, Item, ItemInventoryResponse, SortType } from '../types';
@@ -52,6 +52,20 @@ const EditItemComponent = () => {
 			setError(message);
 			return;
 		}
+	};
+
+	const sendItemRemove = async () => {
+		const { name } = item;
+		const response: ItemInventoryResponse = await removeItem(name);
+		const { error, message } = response;
+
+		if (error) {
+			setError(message);
+			return;
+		}
+
+		clearInputs();
+		await fetchInventory();
 	};
 
 	const updateSelectedItem = (item: Item) => {
@@ -154,7 +168,14 @@ const EditItemComponent = () => {
 					>
 						UPDATE
 					</button>
-					<span className="px-3 text-lg text-red-500">{error}</span>
+					<button
+						className="shadow bg-red-500 px-3 mx-3 pt-2 pb-2 rounded-lg text-white mt-6"
+						onClick={sendItemRemove}
+					>
+						REMOVE
+					</button>
+
+					<span className="text-lg text-red-500">{error}</span>
 				</div>
 			</div>
 		</div>

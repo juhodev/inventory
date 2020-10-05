@@ -102,6 +102,25 @@ export default class ItemInventory {
 		};
 	}
 
+	remove(name: string): ItemInventoryResponse {
+		if (!this.items.has(name)) {
+			return {
+				error: true,
+				message: `${name} doesn't exist in the inventory`,
+			};
+		}
+
+		this.items.delete(name);
+		itemManager.getItemHistory().update(this);
+
+		this.writeToDisk();
+
+		return {
+			error: false,
+			message: `${name} removed from the inventory`,
+		};
+	}
+
 	getAll() {
 		const itemsArray: Item[] = [];
 		for (const item of this.items.values()) {

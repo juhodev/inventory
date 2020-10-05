@@ -2,7 +2,13 @@ import * as React from 'react';
 import { getInventory, removeItem, updateItem } from '../../ts/api';
 import { filterSearch } from '../../ts/search';
 import SearchComponent from '../inventory/search';
-import { EditItem, Item, ItemInventoryResponse, SortType } from '../types';
+import {
+	DeletionState,
+	EditItem,
+	Item,
+	ItemInventoryResponse,
+	SortType,
+} from '../types';
 import SmallItemComponent from './smallItem';
 import TagSelectorComponent from './tagsSelector';
 import TextAreaComponent from './textArea';
@@ -15,6 +21,10 @@ const EditItemComponent = () => {
 	const [searchFilter, setSearchFilter] = useState<string>('');
 	const [selectedId, setSelectedId] = useState<number>(-1);
 	const [error, setError] = useState<string>('');
+	const [confirmationText, setConfirmationText] = useState<string>('');
+	const [deletionState, setDeletionState] = useState<DeletionState>(
+		DeletionState.NONE,
+	);
 
 	const [item, setItem] = useState<EditItem>({
 		id: -1,
@@ -54,6 +64,17 @@ const EditItemComponent = () => {
 		}
 	};
 
+	const confirmItemDeletion = () => {
+		const { name } = item;
+
+		if (confirmationText === name) {
+			sendItemRemove();
+			return;
+		}
+
+		window.alert(`${confirmationText} doesn't equal to the item name!`);
+	};
+
 	const sendItemRemove = async () => {
 		const { name } = item;
 		const response: ItemInventoryResponse = await removeItem(name);
@@ -77,6 +98,7 @@ const EditItemComponent = () => {
 		const { id, name, tags, link, count, info, location } = item;
 		setItem({ id, name, tags, link, count, info, location });
 		setSelectedId(id);
+		resetConfirmationState();
 	};
 
 	const clearInputs = () => {
@@ -90,6 +112,14 @@ const EditItemComponent = () => {
 			info: '',
 			location: '',
 		});
+
+		resetConfirmationState();
+	};
+
+	const resetConfirmationState = () => {
+		setError('');
+		setConfirmationText('');
+		setDeletionState(DeletionState.NONE);
 	};
 
 	useEffect(() => {
@@ -170,13 +200,31 @@ const EditItemComponent = () => {
 					</button>
 					<button
 						className="shadow bg-red-500 px-3 mx-3 pt-2 pb-2 rounded-lg text-white mt-6"
-						onClick={sendItemRemove}
+						onClick={() =>
+							setDeletionState(DeletionState.CONFIRMATION)
+						}
 					>
 						REMOVE
 					</button>
 
 					<span className="text-lg text-red-500">{error}</span>
 				</div>
+				{deletionState === DeletionState.CONFIRMATION && (
+					<div className="my-3 flex flex-row">
+						<TextInputComponent
+							title="Confirm by typing the item name"
+							placeholder="Item name"
+							value={confirmationText}
+							onChange={(value) => setConfirmationText(value)}
+						/>
+						<button
+							className="shadow bg-red-500 px-3 mx-3 pt-2 pb-2 rounded-lg text-white mt-6"
+							onClick={confirmItemDeletion}
+						>
+							CONFIRM DELETION
+						</button>
+					</div>
+				)}
 			</div>
 		</div>
 	);

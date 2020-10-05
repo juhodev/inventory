@@ -86,3 +86,8 @@ export interface ItemInventoryResponse {
 	error: boolean;
 	message: string;
 }
+
+export enum DeletionState {
+	NONE = 0,
+	CONFIRMATION = 1,
+}
